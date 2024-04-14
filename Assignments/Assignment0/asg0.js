@@ -71,9 +71,9 @@ function handleDrawOperationEvent(){
     var v2 = new Vector3([x2,y2,0]);
     drawVector(v2, "blue");
     const operation = document.getElementById('operation-select').value; //read selector value & call vector3 function 
-    console.log(operation);
-    console.log(v2)
-    console.log(v1)
+    //console.log(operation);
+    //console.log(v2)
+    //console.log(v1)
     let scalar = document.getElementById('scalar-input').value; // Retrieve scalar value
     let result;
     switch (operation) {
