@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Change a point color</title>
+    <style>
+        body {
+            background-color: #e6f7ff; 
+        }
+
+        button {
+            background-color: #FF0000; 
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+        Please use a browser that supports "canvas"
+    </canvas>
+
+    <br> <button type="button" id="clearButton">Clear Canvas</button>
+
+    <p id="numdot"> </p>
+
+    <button type="button" id="green">Green</button>
+    <button type="button" id="red">Red</button>
+
+    <div>
+        <h2>Drawing Mode: </h2>
+        <button type="button" id="pointButton">Squares</button>
+        <button type="button" id="triButton">Triangles</button>
+        <button type="button" id="circleButton">(Circles) Segment Count</button>
+    </div>
+
+    <div>
+        <h2>Shape color:</h2>
+        <p>
+            Red <input type="range" min="0" max="100" value="100" class="slider" id="redSlide">
+            Green <input type="range" min="0" max="100" value="0" class="slider" id="greenSlide">
+            Blue <input type="range" min="0" max="100" value="0" class="slider" id="blueSlide">
+        </p>
+    </div>
+    
+
+    <p>
+        Shape Size: <input type="range" min="5" max="40" value="0" class="slider" id="sizeSlide">
+    </p>
+    <p>
+        (Circles) Segment Count: <input type="range" min="3" max="360" value="10" class="slider" id="segmentSlide">
+    </p>
+
+    <div>
+        <h2>Draw a Tree: </h2>
+        <button type="button" id="treeButton">Draw a Tree</button>
+    </div>
+
+    <script src="./lib/webgl-utils.js"></script>
+    <script src="./lib/webgl-debug.js"></script>
+    <script src="./lib/cuon-utils.js"></script>
+    <script src="Tree.js"></script>
+    <script src="Circle.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Point.js"></script>
+    <script src="ColoredPoints.js"></script>
+</body>
+</html>
