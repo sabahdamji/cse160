@@ -58,7 +58,7 @@ class Tree {
         // Enable the assignment to a_Position variable
         gl.enableVertexAttribArray(a_Position);
 
-        // Set the color for drawing (assuming you have a uniform variable for color)
+        // Set the color for drawing 
         const u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
         gl.uniform4fv(u_FragColor, this.color);
 
