@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "three": "^0.163.0"
+  },
+  "name": "assignment5a",
+  "version": "1.0.0",
+  "main": "Three.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/three": "^0.163.0",
+    "vite": "^5.2.10"
+  }
+}
