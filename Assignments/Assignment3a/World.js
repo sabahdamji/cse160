@@ -14,24 +14,24 @@ var VSHADER_SOURCE =
         'v_UV = a_UV;' +
     '}';
  // Fragment shader program
- var FSHADER_SOURCE =
- 'precision mediump float;' +
- 'varying vec2 v_UV;' +
- 'uniform vec4 u_FragColor;' +
- 'uniform sampler2D u_Sampler0;' +
- 'uniform sampler2D u_Sampler1;' +
- 'uniform int u_whichTexture;' +
- 'void main() {' +
- '    if (u_whichTexture == -1) {' +
- '        gl_FragColor = vec4(v_UV, 1.0, 1.0);' +
- '    } else if (u_whichTexture == 0) {' +
- '        gl_FragColor = texture2D(u_Sampler0, v_UV);' + // Use sky texture
- '    } else if (u_whichTexture == 1) {' +
- '        gl_FragColor = texture2D(u_Sampler1, v_UV);' + // Use dog texture
- '    } else {' +
- '        gl_FragColor = u_FragColor;' +
- '    }' +
- '}';
+    var FSHADER_SOURCE =
+    'precision mediump float;' +
+    'varying vec2 v_UV;' +
+    'uniform vec4 u_FragColor;' +
+    'uniform sampler2D u_Sampler0;' +
+    //'uniform sampler2D u_Sampler1;' +
+    'uniform int u_whichTexture;' +
+    'void main() {' +
+    '    if (u_whichTexture == 2) {' + 
+    '        gl_FragColor = u_FragColor;' +
+    '    } else if (u_whichTexture == -1) {' +
+    '        gl_FragColor = vec4(v_UV, 1.0, 1.0);' +
+    '    } else if (u_whichTexture == 0) {' +
+    '        gl_FragColor = texture2D(u_Sampler0, v_UV);' +
+    '    } else {' +
+    '        gl_FragColor = vec4(1,.2,.2,1);' +
+    '    }' +
+    '}';
 
 
 
@@ -47,7 +47,7 @@ let u_ProjectionMatrix;
 let u_ViewMatrix;
 let u_GlobalRotateMatrix;
 let u_Sampler0;
-let u_Sampler1;
+//let u_Sampler1;
 let u_whichTexture;
 
 function setupWebGL(){
@@ -112,11 +112,11 @@ function connectVariablesToGLSL(){
       return false;
     }
 
-    u_Sampler1 = gl.getUniformLocation(gl.program, 'u_Sampler1');
-    if (!u_Sampler1) {
-      console.log('Failed to get the storage location of u_Sampler1');
-      return false;
-    }
+    // var u_Sampler1 = gl.getUniformLocation(gl.program, 'u_Sampler1');
+    // if (!u_Sampler1) {
+    //   console.log('Failed to get the storage location of u_Sampler1');
+    //   return false;
+    // }
 
     // Get the storage location of u_Sampler0 and u_Sampler1
     u_whichTexture = gl.getUniformLocation(gl.program, 'u_whichTexture');
@@ -182,29 +182,23 @@ function addActionsForHtmlUI(){
 // }
 
 function initTextures(gl, n) {
-    // Create the sky image object
-    var skyImage = new Image();
-    if (!skyImage) {
-        console.log('Failed to create the sky image object');
-        return false;
+    
+  
+    // Create the image object
+    var image = new Image();
+    if (!image) {
+      console.log('Failed to create the image object');
+      return false;
     }
-    skyImage.onload = function() { sendTextureToGLSL(skyImage, 0); };
-    skyImage.src = '../Assignment3a/sky.jpg';
-
-    // Create the dog image object
-    var dogImage = new Image();
-    if (!dogImage) {
-        console.log('Failed to create the dog image object');
-        return false;
-    }
-    dogImage.onload = function() { sendTextureToGLSL(dogImage, 1); };
-    dogImage.src = '../Assignment3a/dog.jpg';
-
+    // Register the event handler to be called when image loading is completed
+    image.onload = function(){ sendTextureToGLSL(image); };
+    // Tell the browser to load an Image
+    image.src = '../Assignment3a/sky.jpg';
+  
     return true;
-}
+  }
 
-
-function sendTextureToGLSL(image, textureUnit) {
+  function sendTextureToGLSL(image) {
     // Create a texture object
     var texture = gl.createTexture(); 
     if (!texture) {
@@ -212,22 +206,26 @@ function sendTextureToGLSL(image, textureUnit) {
       return false;
     }
   
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); 
-    gl.activeTexture(gl.TEXTURE0 + textureUnit); 
-    gl.bindTexture(gl.TEXTURE_2D, texture); 
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);// Flip the image's y-axis
+    // Make the texture unit active
+      gl.activeTexture(gl.TEXTURE0);
+      
+      //gl.activeTexture(gl.TEXTURE1);
+    // Bind the texture object to the target
+    gl.bindTexture(gl.TEXTURE_2D, texture);   
   
     // Set texture parameters
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    // Set the image to texture
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
     
-    if (textureUnit === 0) {
-        gl.uniform1i(u_Sampler0, textureUnit); 
-    } else if (textureUnit === 1) {
-        gl.uniform1i(u_Sampler1, textureUnit); 
-    }
+    gl.uniform1i(u_Sampler0, 0);   // Pass the texure unit to u_Sampler
+    
+    // Clear <canvas>
+    gl.clear(gl.COLOR_BUFFER_BIT);
   
-    gl.clear(gl.COLOR_BUFFER_BIT); // Clear canvas
-}
+   console.log('finished loadtexture');
+  }
 function main() {
 
     //set up canvas and gl variables
@@ -333,7 +331,7 @@ var g_camera = new Camera();
 //     at: { x: 0, y: 0, z: -100 },
 //     up: { x: 0, y: 1, z: 0 }
 // };
-//console.log("g cam2", g_camera);
+console.log("g cam2", g_camera);
 
 
 
@@ -412,7 +410,7 @@ function renderAllShapes(){
     //draw a cube
     var body = new Cube();
     body.color = [0.6, 0.4, 0.2, 1.0]; 
-    body.textureNum = -1;
+    body.textureNum = 1;
     body.matrix.translate(-0.25, -0.25, 0.0); 
     body.matrix.rotate(-5,1,0, 0);
     body.matrix.scale(0.5,.3, .5); 
@@ -421,6 +419,7 @@ function renderAllShapes(){
 
     var head = new Cube();
     head.color = [0.3, 0.15, 0.05, 1.0]; 
+    head.textureNum= -1;
     head.matrix.translate(-0.65, -0.25, 0.0); 
     head.matrix.rotate(-g_headAngle,1,0, 0);
     head.matrix.scale(0.4,.4, .4); 
