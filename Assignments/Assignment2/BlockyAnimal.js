@@ -118,7 +118,6 @@ function addActionsForHtmlUI(){
 //     tree.render(); 
 // }
 
-
 function main() {
 
     //set up canvas and gl variables
@@ -154,7 +153,6 @@ function tick() {
     renderAllShapes();
     requestAnimationFrame(tick);
 }
-
 
 
 
