@@ -526,7 +526,7 @@ function renderAllShapes(){
         floor.textureNum= 1;
     } else {
         sky.textureNum =  2; //use the second sky texture
-        floor.textureNum= -99;
+        floor.textureNum= 2;
 
 
     }
