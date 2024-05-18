@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "three": "^0.163.0"
+  },
+  "name": "assignment5b",
+  "version": "1.0.0",
+  "main": "Three.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/three": "^0.163.0",
+    "gh-pages": "^6.1.1",
+    "vite": "^5.2.10"
+  },
+  "scripts": {
+    "predeploy": "npx vite build",
+    "deploy": "gh-pages -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
