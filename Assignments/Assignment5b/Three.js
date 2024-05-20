@@ -56,7 +56,7 @@ class ColorGUIHelper {
     // Create materials
     const material = new THREE.MeshBasicMaterial({ color: 0xFF8844, map: texture });
   
-    // Ambient light
+    // Ambient lightx
   const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1);
   scene.add(ambientLight);
 
@@ -99,8 +99,8 @@ class ColorGUIHelper {
         const scaleFactor = -0.1;
         root.scale.set(scaleFactor, scaleFactor, scaleFactor);
         root.position.x = 3;
-        root.rotation.x = Math.PI / 2; // Rotate around the x-axis by 90 degrees
-        root.position.set(3, -0.5, 0); // Move down by setting y-axis position to -0.5
+        root.rotation.x = Math.PI / 2; 
+        root.position.set(3, -0.5, 0); 
 
         root.position.y = 0.5;
         scene.add(root);
