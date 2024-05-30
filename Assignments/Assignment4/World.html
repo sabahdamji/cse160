@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Change a point color</title>
+    <style>
+        body {
+            background-color: #e6f7ff; 
+        }
+
+        button {
+            background-color: #FF0000; 
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+        Please use a browser that supports "canvas"
+    </canvas>
+
+   <p id="numdot"></p>
+
+<p>
+    <button type="button" id="normalOn">Normal On</button>
+    <button type="button" id="normalOff">Normal Off</button>
+
+</p>
+<p>    <button id="lightOn">Turn Light On</button>
+        <button id="lightOff">Turn Light Off</button></p>
+
+<p>
+    Light X <input type="range" min="-250" max="250" value="0" class="slider" id="lightSlideX">
+    Light Y <input type="range" min="-250" max="250" value="100" class="slider" id="lightSlideY">
+    Light Z <input type="range" min="-250" max="250" value="-200" class="slider" id="lightSlideZ">
+</p>
+
+<!-- <p>
+    Tail Animation:
+    <button type="button" id="animationDogOnButton">ON</button>
+    <button type="button" id="animationDogOffButton">OFF</button>
+
+</p> -->
+
+<!-- <p>    
+    Play Fetch: 
+    <button id="goPlayFetchButton">Go Play Fetch</button>
+
+</p> -->
+
+    <p>
+        <!-- Dog Head: <input type="range" min="-45" max="45" value="" class="slider" id="headSlide">
+        Dog Tail: <input type="range" min="-45" max="45" value="5" class="slider" id="tailSlide"> -->
+        Camera Angle: <input type="range" min="0" max="90" value="5" class="slider" id="angleSlide">
+    </p>
+
+    <!-- <p style="font-size: 24px; font-weight: bold;">Welcome to the Dog Park! Want to play fetch? Click the button Above!</p> -->
+
+   
+
+
+    <script src="./lib/webgl-utils.js"></script>
+    <script src="./lib/webgl-debug.js"></script>
+    <script src="./lib/cuon-utils.js"></script>
+    <script src="./lib/cuon-matrix.js"></script>
+    <script src="lib/cuon-matrix-cse160.js"></script>
+    <script src="Camera.js"></script>
+    <script src="Circle.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Sphere.js"></script>
+    <script src="Point.js"></script>
+    <script src="Cube.js"></script>
+    <script src="World.js"></script>
+
+
+
+
+
+
+</body>
+</html>
